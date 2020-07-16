@@ -83,6 +83,7 @@ class _SpeedOMeterState extends State<SpeedOMeter>
         return new Container(
           height: constraints.maxWidth,
           width: constraints.maxWidth,
+
           child: new Stack(fit: StackFit.expand, children: <Widget>[
             new Container(
               child: new CustomPaint(

@@ -111,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               height: 300,
               width: 300,
-              child: Padding(
+               child: Padding(
                 padding: new EdgeInsets.all(40.0),
                 child: new SpeedOMeter(start:start, end:end, highlightStart:(_lowerValue/end), highlightEnd:(_upperValue/end), themeData:somTheme, eventObservable: this.eventObservable),
               ),
