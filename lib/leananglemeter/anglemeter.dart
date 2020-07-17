@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'dart:ui';
 
@@ -7,7 +6,6 @@ import 'package:flutter/widgets.dart';
 import 'package:lean_flutter_app/leananglemeter/handpainter.dart';
 import 'package:lean_flutter_app/leananglemeter/linepainter.dart';
 import 'package:lean_flutter_app/leananglemeter/speedtextpainter.dart';
-
 import 'package:rxdart/rxdart.dart';
 
 class LeanAngleMeter extends StatefulWidget {
@@ -18,6 +16,7 @@ class LeanAngleMeter extends StatefulWidget {
   ThemeData themeData;
 
   PublishSubject<double> eventObservable;
+
   LeanAngleMeter(
       {this.start,
       this.end,
@@ -27,8 +26,8 @@ class LeanAngleMeter extends StatefulWidget {
       this.eventObservable}) {}
 
   @override
-  _LeanAngleMeterState createState() => new _LeanAngleMeterState(this.start, this.end,
-      this.highlightStart, this.highlightEnd, this.eventObservable);
+  _LeanAngleMeterState createState() => new _LeanAngleMeterState(this.start,
+      this.end, this.highlightStart, this.highlightEnd, this.eventObservable);
 }
 
 class _LeanAngleMeterState extends State<LeanAngleMeter>
@@ -83,7 +82,6 @@ class _LeanAngleMeterState extends State<LeanAngleMeter>
         return new Container(
           height: constraints.maxWidth,
           width: constraints.maxWidth,
-
           child: new Stack(fit: StackFit.expand, children: <Widget>[
             new Container(
               child: new CustomPaint(

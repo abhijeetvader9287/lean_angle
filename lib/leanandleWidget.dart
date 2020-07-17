@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:lean_flutter_app/leananglemeter/anglemeter.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:sensors/sensors.dart';
+
 class leanangleWidget extends StatefulWidget {
   @override
   _leanangleWidgetState createState() => _leanangleWidgetState();
@@ -19,28 +20,26 @@ class _leanangleWidgetState extends State<leanangleWidget> {
   List<double> _userAccelerometerValues;
   List<double> _gyroscopeValues;
   List<StreamSubscription<dynamic>> _streamSubscriptions =
-  <StreamSubscription<dynamic>>[];
+      <StreamSubscription<dynamic>>[];
   final ThemeData somTheme = new ThemeData(
       primaryColor: Colors.blue,
       accentColor: Colors.black,
-      backgroundColor: Colors.grey
-  );
+      backgroundColor: Colors.grey);
 
   @override
   Widget build(BuildContext context) {
     final List<String> accelerometer =
-    _accelerometerValues?.map((double v) => v.toStringAsFixed(1))?.toList();
+        _accelerometerValues?.map((double v) => v.toStringAsFixed(1))?.toList();
     final List<String> gyroscope =
-    _gyroscopeValues?.map((double v) => v.toStringAsFixed(1))?.toList();
+        _gyroscopeValues?.map((double v) => v.toStringAsFixed(1))?.toList();
     final List<String> userAccelerometer = _userAccelerometerValues
         ?.map((double v) => v.toStringAsFixed(1))
         ?.toList();
     _streamSubscriptions
-        .add(accelerometerEvents.listen((AccelerometerEvent event) async{
-      await  setState(() {
-
+        .add(accelerometerEvents.listen((AccelerometerEvent event) async {
+      await setState(() {
         _accelerometerValues = <double>[event.x, event.y, event.z];
-        if(6+event.y>=0) {
+        if (6 + event.y >= 0) {
           eventObservable.add(6 + event.y);
         }
       });
@@ -57,20 +56,29 @@ class _leanangleWidgetState extends State<leanangleWidget> {
       });
     }));
 
-    return Container(
-      height: 300,
-      width: 300,
-      child: Padding(
-        padding: new EdgeInsets.all(40.0),
-        child: new LeanAngleMeter(start:start, end:end, highlightStart:(_lowerValue/end), highlightEnd:(_upperValue/end), themeData:somTheme, eventObservable: this.eventObservable),
-      ),
+    return Column(
+      children: [
+        Container(
+          height: 300,
+          width: 300,
+          child: Padding(
+            padding: new EdgeInsets.all(40.0),
+            child: new LeanAngleMeter(
+                start: start,
+                end: end,
+                highlightStart: (_lowerValue / end),
+                highlightEnd: (_upperValue / end),
+                themeData: somTheme,
+                eventObservable: this.eventObservable),
+          ),
+        ),
+      ],
     );
   }
 
   @override
   void dispose() {
     super.dispose();
-
 
     for (StreamSubscription<dynamic> subscription in _streamSubscriptions) {
       subscription.cancel();
@@ -80,6 +88,5 @@ class _leanangleWidgetState extends State<leanangleWidget> {
   @override
   void initState() {
     super.initState();
-
   }
 }

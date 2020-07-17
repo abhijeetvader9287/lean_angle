@@ -1,11 +1,8 @@
-import 'dart:async';
-
 import 'package:background_location/background_location.dart';
 import 'package:flutter/material.dart';
-import 'package:lean_flutter_app/leananglemeter/anglemeter.dart';
 import 'package:lean_flutter_app/speedometer/speedometer.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:sensors/sensors.dart';
+
 class speedometerWidget extends StatefulWidget {
   @override
   _speedometerWidgetState createState() => _speedometerWidgetState();
@@ -17,32 +14,33 @@ class _speedometerWidgetState extends State<speedometerWidget> {
   int startSpeed = 0;
   int endSpeed = 200;
 
-
-
   PublishSubject<double> eventObservableSpeed = new PublishSubject();
   final ThemeData somTheme = new ThemeData(
       primaryColor: Colors.blue,
       accentColor: Colors.black,
-      backgroundColor: Colors.grey
-  );
+      backgroundColor: Colors.grey);
+
   @override
   Widget build(BuildContext context) {
-
     return Container(
       height: 300,
       width: 300,
       child: Padding(
         padding: new EdgeInsets.all(40.0),
-        child: new SpeedOMeter(start:startSpeed, end:endSpeed, highlightStart:(_lowerValueSpeed/endSpeed), highlightEnd:(_upperValueSpeed/endSpeed), themeData:somTheme, eventObservable: this.eventObservableSpeed),
+        child: new SpeedOMeter(
+            start: startSpeed,
+            end: endSpeed,
+            highlightStart: (_lowerValueSpeed / endSpeed),
+            highlightEnd: (_upperValueSpeed / endSpeed),
+            themeData: somTheme,
+            eventObservable: this.eventObservableSpeed),
       ),
-
     );
   }
 
   @override
   void dispose() {
     super.dispose();
-
 
     BackgroundLocation.stopLocationService();
   }
@@ -53,7 +51,7 @@ class _speedometerWidgetState extends State<speedometerWidget> {
 
     BackgroundLocation.getPermissions(
       onGranted: () {
-         BackgroundLocation.startLocationService();
+        //BackgroundLocation.startLocationService();
         // Start location service here or do something else
       },
       onDenied: () {
@@ -61,10 +59,9 @@ class _speedometerWidgetState extends State<speedometerWidget> {
       },
     );
     BackgroundLocation.getLocationUpdates((location) async {
-     await setState(() {
-         eventObservableSpeed.add(location.speed*(18/5));
+      await setState(() {
+        eventObservableSpeed.add(location.speed * (18 / 5));
       });
     });
-
   }
 }

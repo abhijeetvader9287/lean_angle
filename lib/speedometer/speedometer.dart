@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'dart:ui';
 
@@ -7,7 +6,6 @@ import 'package:flutter/widgets.dart';
 import 'package:lean_flutter_app/speedometer/handpainter.dart';
 import 'package:lean_flutter_app/speedometer/linepainter.dart';
 import 'package:lean_flutter_app/speedometer/speedtextpainter.dart';
-
 import 'package:rxdart/rxdart.dart';
 
 class SpeedOMeter extends StatefulWidget {
@@ -18,13 +16,14 @@ class SpeedOMeter extends StatefulWidget {
   ThemeData themeData;
 
   PublishSubject<double> eventObservable;
+
   SpeedOMeter(
       {this.start,
-        this.end,
-        this.highlightStart,
-        this.highlightEnd,
-        this.themeData,
-        this.eventObservable}) {}
+      this.end,
+      this.highlightStart,
+      this.highlightEnd,
+      this.themeData,
+      this.eventObservable}) {}
 
   @override
   _SpeedOMeterState createState() => new _SpeedOMeterState(this.start, this.end,
@@ -80,52 +79,52 @@ class _SpeedOMeterState extends State<SpeedOMeter>
     return new Center(
       child: new LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
-            return new Container(
-              height: constraints.maxWidth,
-              width: constraints.maxWidth,
-              child: new Stack(fit: StackFit.expand, children: <Widget>[
-                new Container(
-                  child: new CustomPaint(
-                      foregroundPainter: new LinePainter(
-                          lineColor: this.widget.themeData.backgroundColor,
-                          completeColor: this.widget.themeData.primaryColor,
-                          startValue: this.start,
-                          endValue: this.end,
-                          startPercent: this.widget.highlightStart,
-                          endPercent: this.widget.highlightEnd,
-                          width: 40.0)),
+        return new Container(
+          height: constraints.maxWidth,
+          width: constraints.maxWidth,
+          child: new Stack(fit: StackFit.expand, children: <Widget>[
+            new Container(
+              child: new CustomPaint(
+                  foregroundPainter: new LinePainter(
+                      lineColor: this.widget.themeData.backgroundColor,
+                      completeColor: this.widget.themeData.primaryColor,
+                      startValue: this.start,
+                      endValue: this.end,
+                      startPercent: this.widget.highlightStart,
+                      endPercent: this.widget.highlightEnd,
+                      width: 40.0)),
+            ),
+            new Center(
+                //   aspectRatio: 1.0,
+                child: new Container(
+                    height: constraints.maxWidth,
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(20.0),
+                    child: new Stack(fit: StackFit.expand, children: <Widget>[
+                      new CustomPaint(
+                        painter: new HandPainter(
+                            value: val,
+                            start: this.start,
+                            end: this.end,
+                            color: this.widget.themeData.accentColor),
+                      ),
+                    ]))),
+            new Center(
+              child: new Container(
+                width: 30.0,
+                height: 30.0,
+                decoration: new BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: this.widget.themeData.backgroundColor,
                 ),
-                new Center(
-                  //   aspectRatio: 1.0,
-                    child: new Container(
-                        height: constraints.maxWidth,
-                        width: double.infinity,
-                        padding: const EdgeInsets.all(20.0),
-                        child: new Stack(fit: StackFit.expand, children: <Widget>[
-                          new CustomPaint(
-                            painter: new HandPainter(
-                                value: val,
-                                start: this.start,
-                                end: this.end,
-                                color: this.widget.themeData.accentColor),
-                          ),
-                        ]))),
-                new Center(
-                  child: new Container(
-                    width: 30.0,
-                    height: 30.0,
-                    decoration: new BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: this.widget.themeData.backgroundColor,
-                    ),
-                  ),
-                ),
-                new CustomPaint(
-                    painter: new SpeedTextPainter(
-                        start: this.start, end: this.end, value: this.textVal)),
-              ]),
-            );
-          }),
+              ),
+            ),
+            new CustomPaint(
+                painter: new SpeedTextPainter(
+                    start: this.start, end: this.end, value: this.textVal)),
+          ]),
+        );
+      }),
     );
   }
 }
