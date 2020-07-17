@@ -53,7 +53,7 @@ class _speedometerWidgetState extends State<speedometerWidget> {
 
     BackgroundLocation.getPermissions(
       onGranted: () {
-         //BackgroundLocation.startLocationService();
+         BackgroundLocation.startLocationService();
         // Start location service here or do something else
       },
       onDenied: () {
