@@ -4,13 +4,13 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:lean_flutter_app/handpainter.dart';
-import 'package:lean_flutter_app/linepainter.dart';
-import 'package:lean_flutter_app/speedtextpainter.dart';
+import 'package:lean_flutter_app/leananglemeter/handpainter.dart';
+import 'package:lean_flutter_app/leananglemeter/linepainter.dart';
+import 'package:lean_flutter_app/leananglemeter/speedtextpainter.dart';
 
 import 'package:rxdart/rxdart.dart';
 
-class SpeedOMeter extends StatefulWidget {
+class LeanAngleMeter extends StatefulWidget {
   int start;
   int end;
   double highlightStart;
@@ -18,7 +18,7 @@ class SpeedOMeter extends StatefulWidget {
   ThemeData themeData;
 
   PublishSubject<double> eventObservable;
-  SpeedOMeter(
+  LeanAngleMeter(
       {this.start,
       this.end,
       this.highlightStart,
@@ -27,11 +27,11 @@ class SpeedOMeter extends StatefulWidget {
       this.eventObservable}) {}
 
   @override
-  _SpeedOMeterState createState() => new _SpeedOMeterState(this.start, this.end,
+  _LeanAngleMeterState createState() => new _LeanAngleMeterState(this.start, this.end,
       this.highlightStart, this.highlightEnd, this.eventObservable);
 }
 
-class _SpeedOMeterState extends State<SpeedOMeter>
+class _LeanAngleMeterState extends State<LeanAngleMeter>
     with TickerProviderStateMixin {
   int start;
   int end;
@@ -45,7 +45,7 @@ class _SpeedOMeterState extends State<SpeedOMeter>
   AnimationController percentageAnimationController;
   StreamSubscription<double> subscription;
 
-  _SpeedOMeterState(int start, int end, double highlightStart,
+  _LeanAngleMeterState(int start, int end, double highlightStart,
       double highlightEnd, PublishSubject<double> eventObservable) {
     this.start = start;
     this.end = end;
