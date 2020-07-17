@@ -22,19 +22,35 @@ class _speedometerWidgetState extends State<speedometerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 300,
-      width: 300,
-      child: Padding(
-        padding: new EdgeInsets.all(40.0),
-        child: new SpeedOMeter(
-            start: startSpeed,
-            end: endSpeed,
-            highlightStart: (_lowerValueSpeed / endSpeed),
-            highlightEnd: (_upperValueSpeed / endSpeed),
-            themeData: somTheme,
-            eventObservable: this.eventObservableSpeed),
-      ),
+    return Column(
+      children: [
+        RaisedButton(
+          child: Text("Start"),
+          onPressed: ()=>{
+          BackgroundLocation.startLocationService()
+          },
+        ),
+        RaisedButton(
+          child: Text("Stop"),
+          onPressed: ()=>{
+          BackgroundLocation.stopLocationService()
+        },
+        ),
+        Container(
+          height: 300,
+          width: 300,
+          child: Padding(
+            padding: new EdgeInsets.all(40.0),
+            child: new SpeedOMeter(
+                start: startSpeed,
+                end: endSpeed,
+                highlightStart: (_lowerValueSpeed / endSpeed),
+                highlightEnd: (_upperValueSpeed / endSpeed),
+                themeData: somTheme,
+                eventObservable: this.eventObservableSpeed),
+          ),
+        ),
+      ],
     );
   }
 
