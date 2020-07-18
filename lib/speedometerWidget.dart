@@ -45,8 +45,8 @@ class _speedometerWidgetState extends State<speedometerWidget> {
           children: [
 
             Container(
-              height: 300,
-              width: 300,
+              height: 280,
+              width: 280,
               child: Padding(
                 padding: new EdgeInsets.all(40.0),
                 child: new SpeedOMeter(
