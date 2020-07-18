@@ -56,24 +56,32 @@ class _leanangleWidgetState extends State<leanangleWidget> {
       });
     }));
 
-    return Column(
-      children: [
-        Container(
-          height: 300,
-          width: 300,
-          child: Padding(
-            padding: new EdgeInsets.all(40.0),
-            child: new LeanAngleMeter(
-                start: start,
-                end: end,
-                highlightStart: (_lowerValue / end),
-                highlightEnd: (_upperValue / end),
-                themeData: somTheme,
-                eventObservable: this.eventObservable),
-          ),
+    return
+      Scaffold(
+        appBar: AppBar(
+          title: Text("Second Route"),
         ),
-      ],
-    );
+        body:  Column(
+          children: [
+            Container(
+              height: 300,
+              width: 300,
+              child: Padding(
+                padding: new EdgeInsets.all(40.0),
+                child: new LeanAngleMeter(
+                    start: start,
+                    end: end,
+                    highlightStart: (_lowerValue / end),
+                    highlightEnd: (_upperValue / end),
+                    themeData: somTheme,
+                    eventObservable: this.eventObservable),
+              ),
+            ),
+          ],
+        ),
+      );
+
+
   }
 
   @override

@@ -52,12 +52,33 @@ class _MyHomePageState extends State<MyHomePage> {
         title: const Text('Sensor Example'),
       ),
       body: SingleChildScrollView(
-        child: Row(
-          children: <Widget>[
-            speedometerWidget(),
-            // LeanAngleMeter()
-            leanangleWidget()
-          ],
+        child: Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              RaisedButton(
+                child: Text("Speedometer"),
+                onPressed: ()=>{
+
+                Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => speedometerWidget()),
+                )
+                },
+              ),
+              RaisedButton(
+                child: Text("Leanangle"),
+                onPressed: ()=>{
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => leanangleWidget()),
+                  )
+                },
+              ),
+              // LeanAngleMeter()
+
+            ],
+          ),
         ),
       ),
     );
